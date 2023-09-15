@@ -1,0 +1,565 @@
+[gd_scene load_steps=14 format=3 uid="uid://cwoou7p4d065"]
+
+[ext_resource type="Shader" path="res://Shaders/psx_unlit.gdshader" id="1_6kcyg"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_h5mon"]
+[ext_resource type="Texture2D" uid="uid://ct6srbdhbfntx" path="res://Textures/tex_grass_1.jpg" id="2_fe7il"]
+[ext_resource type="Shader" path="res://Shaders/pixelization.gdshader" id="4_fsmej"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k5qsw"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_er403"]
+sky_material = SubResource("ProceduralSkyMaterial_k5qsw")
+
+[sub_resource type="Environment" id="Environment_i283e"]
+background_mode = 2
+sky = SubResource("Sky_er403")
+tonemap_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_unma1"]
+render_priority = 0
+shader = ExtResource("1_6kcyg")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = 0.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(3, 3)
+shader_parameter/albedo = ExtResource("2_fe7il")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_44kkm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dfxy1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v7tf4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4ko6"]
+render_priority = 0
+shader = ExtResource("4_fsmej")
+
+[sub_resource type="QuadMesh" id="QuadMesh_baysu"]
+
+[node name="World" type="Node3D"]
+
+[node name="Enviroment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = SubResource("Environment_i283e")
+
+[node name="Floor" type="Node3D" parent="Enviroment"]
+
+[node name="CSGFloor1" type="CSGMesh3D" parent="Enviroment/Floor"]
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor2" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor3" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor4" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor5" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor7" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor8" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor9" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor10" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor11" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor12" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor13" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor14" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor15" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor16" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor17" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor18" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor19" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor20" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor21" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor22" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor23" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor24" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor25" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor26" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor27" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor28" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor29" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor30" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor31" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor32" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor33" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor34" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor35" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor36" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor37" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor38" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor39" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor40" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor41" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor42" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor43" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor44" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor45" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor46" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor47" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor48" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor49" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor50" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor51" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor52" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor53" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor54" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor55" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor56" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor57" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor58" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor59" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor60" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor61" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor62" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor63" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor64" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor65" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor66" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor67" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor68" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor69" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor70" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor71" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor72" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor73" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor74" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor75" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 6)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor76" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor77" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor78" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor79" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor80" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor81" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 10)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CSGFloor6" type="CSGMesh3D" parent="Enviroment/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+material_override = SubResource("ShaderMaterial_unma1")
+use_collision = true
+mesh = SubResource("PlaneMesh_44kkm")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_h5mon")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_dfxy1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_v7tf4")
+
+[node name="Head" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Head"]
+fov = 55.0
+
+[node name="PixelizationShaderMesh" type="CSGMesh3D" parent="CharacterBody3D/Head/Camera3D"]
+transform = Transform3D(2.59898, 0, 0, 0, 2.11406, 0, 0, 0, 1, 0, 0, -0.677993)
+material_override = SubResource("ShaderMaterial_q4ko6")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("QuadMesh_baysu")

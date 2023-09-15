@@ -1,0 +1,11 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1694753369
+::res://Images/::1694752217
+icon.svg::CompressedTexture2D::5677722027029342384::1694752189::1694752217::1::::<><>::
+::res://Scenes/::1694752936
+World.tscn::PackedScene::186670137499956072::1694752936::0::1::::<><>::res://Scripts/Player.gd
+::res://Scripts/::1694752769
+Player.gd::GDScript::-1::1694752493::0::1::::<>CharacterBody3D<>::
+::res://Shaders/::1694752210
+::res://Textures/::1694753388
+tex_grass_1.jpg::CompressedTexture2D::6171548428728209961::1694753388::1694753445::1::::<><>::

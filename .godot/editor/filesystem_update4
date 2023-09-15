@@ -1,0 +1,7 @@
+res://Player.gd
+res://Scenes/World.tscn
+res://Shaders/psx_unlit.gdshader
+res://Shaders/psx_dither.gdshader
+res://Shaders/psx_lit.gdshader
+res://Shaders/psx_fade.gdshader
+res://Shaders/pixelization.gdshader
